@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config()
-const uri = `mongodb+srv://emaWatson:Ne355tOGN5FSZ2cj@cluster0.unyt1.mongodb.net/emaJohnStore?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.unyt1.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 
 const app = express()
@@ -12,8 +12,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const port = 8080
-
-console.log(process.env.DB_USER)
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
@@ -23,7 +21,6 @@ client.connect(err => {
       const products = req.body;
       productsCollection.insertOne(products)
       .then(result => {
-          console.log(result.insertedCount);
           res.send(result.insertedCount)
       })
   })
