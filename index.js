@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config()
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.unyt1.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://emaWatson:Ne355tOGN5FSZ2cj@cluster0.unyt1.mongodb.net/emaJohnStore?retryWrites=true&w=majority`;
 
 
 const app = express()
@@ -67,6 +67,4 @@ app.get('/', (req, res) => {
   res.send('Hello ema watson!')
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+app.listen(process.env.PORT || port)
